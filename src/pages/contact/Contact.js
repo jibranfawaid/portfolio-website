@@ -33,30 +33,10 @@ export const Contact = () => {
     try {
       setSending(true);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/message`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.value,
-          message: message.value,
-        }),
-      });
-
-      const responseMessage = await response.json();
-
-      const statusError = getStatusError({
-        status: response?.status,
-        errorMessage: responseMessage?.error,
-        fallback: 'There was a problem sending your message',
-      });
-
-      if (statusError) throw new Error(statusError);
+      window.location.href = "mailto:jibranfawaid@gmail.com?body=" + message.value;
 
       setComplete(true);
-      setSending(false);
+
     } catch (error) {
       setSending(false);
       setStatusError(error.message);
@@ -85,17 +65,6 @@ export const Contact = () => {
               className={styles.divider}
               data-status={status}
               style={getDelay(tokens.base.durationXS, initDelay, 0.4)}
-            />
-            <Input
-              required
-              className={styles.input}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS, initDelay)}
-              autoComplete="email"
-              label="Your Email"
-              type="email"
-              maxLength={512}
-              {...email}
             />
             <Input
               required
@@ -151,7 +120,7 @@ export const Contact = () => {
               className={styles.completeTitle}
               data-status={status}
             >
-              Message Sent
+              You have directed to your e-mail service
             </Heading>
             <Text
               size="l"

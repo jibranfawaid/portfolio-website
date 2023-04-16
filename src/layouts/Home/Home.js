@@ -18,7 +18,7 @@ import { ProjectSummary } from 'layouts/Home/ProjectSummary';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 
-const disciplines = ['Developer', 'Prototyper', 'Animator', 'Illustrator', 'Modder'];
+const disciplines = ['Python', 'Java', 'Golang', 'NodeJS'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -30,7 +30,7 @@ export const Home = () => {
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [intro, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -56,6 +56,7 @@ export const Home = () => {
     sections.forEach(section => {
       sectionObserver.observe(section.current);
     });
+    console.log(sections);
 
     indicatorObserver.observe(intro.current);
 
@@ -68,8 +69,8 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Designer + Developer"
-        description="Design portfolio of Hamish Williams — a product designer working on web & mobile
+        title="Programmer on Developer"
+        description="Design portfolio of Jibran Fawaid — a product designer working on web & mobile
           apps with a focus on motion, experience design, and accessibility."
       />
       <Intro
@@ -77,71 +78,6 @@ export const Home = () => {
         sectionRef={intro}
         disciplines={disciplines}
         scrollIndicatorHidden={scrollIndicatorHidden}
-      />
-      <ProjectSummary
-        id="project-1"
-        sectionRef={projectOne}
-        visible={visibleSections.includes(projectOne.current)}
-        index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
-        buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
-        model={{
-          type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
-          textures: [
-            {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
-            },
-          ],
-        }}
-      />
-      <ProjectSummary
-        id="project-2"
-        alternate
-        sectionRef={projectTwo}
-        visible={visibleSections.includes(projectTwo.current)}
-        index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
-        buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
-        model={{
-          type: 'phone',
-          alt: 'App login screen',
-          textures: [
-            {
-              srcSet: [gamestackTexture, gamestackTextureLarge],
-              placeholder: gamestackTexturePlaceholder,
-            },
-            {
-              srcSet: [gamestackTexture2, gamestackTexture2Large],
-              placeholder: gamestackTexture2Placeholder,
-            },
-          ],
-        }}
-      />
-      <ProjectSummary
-        id="project-3"
-        sectionRef={projectThree}
-        visible={visibleSections.includes(projectThree.current)}
-        index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
-        buttonText="View project"
-        buttonLink="/projects/slice"
-        model={{
-          type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
-          textures: [
-            {
-              srcSet: [sliceTexture, sliceTextureLarge],
-              placeholder: sliceTexturePlaceholder,
-            },
-          ],
-        }}
       />
       <Profile
         sectionRef={details}
